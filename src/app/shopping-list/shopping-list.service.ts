@@ -27,7 +27,7 @@ export class ShoppingListService {
     //   this.addIngredient(ingredient);
     // }
     this.ingredients.push(...ingredients);
-    this.ingredientsChanged.emit(this.ingredients.slice()); // only emitting once
+    this.ingredientsChanged.emit(this.ingredients.slice()); // only emitting once as opposed to the for loop
   }
 }
 
