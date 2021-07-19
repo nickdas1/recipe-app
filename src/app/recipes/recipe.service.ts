@@ -11,26 +11,33 @@ import { Subject } from 'rxjs';
 export class RecipeService {
   recipesChanged = new Subject<Recipe[]>();
 
+  // private recipes: Recipe[] = [
+  //   new Recipe(
+  //     'Test Recipe', 
+  //     'This is just a test', 
+  //     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqqxHemGDCQK4ulOWZyecL4hqsJTVnibRInQ&usqp=CAU',
+  //     [
+  //       new Ingredient('Meat', 1),
+  //       new Ingredient('French Fries', 20)
+  //     ]),
+  //   new Recipe(
+  //     'Test Recipe 2', 
+  //     'This is another test', 
+  //     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqqxHemGDCQK4ulOWZyecL4hqsJTVnibRInQ&usqp=CAU',
+  //     [
+  //       new Ingredient('Bread', 2),
+  //       new Ingredient('Meat', 1)
+  //     ])
+  // ];
+
+  private recipes: Recipe[] = [];
+
   constructor(private shoppingListService: ShoppingListService) {}
 
-  private recipes: Recipe[] = [
-    new Recipe(
-      'Test Recipe', 
-      'This is just a test', 
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqqxHemGDCQK4ulOWZyecL4hqsJTVnibRInQ&usqp=CAU',
-      [
-        new Ingredient('Meat', 1),
-        new Ingredient('French Fries', 20)
-      ]),
-    new Recipe(
-      'Test Recipe 2', 
-      'This is another test', 
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqqxHemGDCQK4ulOWZyecL4hqsJTVnibRInQ&usqp=CAU',
-      [
-        new Ingredient('Bread', 2),
-        new Ingredient('Meat', 1)
-      ])
-  ];
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice());
+  }
 
   getRecipes() {
     return this.recipes.slice(); // makes a copy of the array 
